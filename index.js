@@ -16,6 +16,7 @@ const PORT = process.env.PORT || 5000;
 // }));
 
 // app.options('*', cors()); // handle preflight requests
+app.use(cors());
 app.use(express.json());
 
 // Connect to DB
@@ -25,7 +26,11 @@ connectDB();
 app.use('/api', routes);
 
 // Error handling middleware
-app.use(errorHandler);
+// app.use(errorHandler);
+app.use((err, req, res, next) => {
+  console.error(err.stack); // logs error to console
+  res.status(500).json({ message: err.message || 'Internal Server Error' });
+});
 
 // Start server
 app.listen(PORT, () => {

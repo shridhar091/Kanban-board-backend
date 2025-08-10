@@ -25,21 +25,20 @@ router.get('/', async (req, res, next) => {
 // });
 router.post('/', async (req, res, next) => {
   try {
-    console.log("POST /sections body:", req.body); // Debug log
-
     const { title } = req.body;
-    if (!title) {
-      return res.status(400).json({ error: "Title is required" });
+
+    if (!title || !title.trim()) {
+      return res.status(400).json({ message: 'Section title is required' });
     }
 
     const section = new Section({ title, taskIds: [] });
     await section.save();
-    
+
     res.status(201).json(section);
   } catch (error) {
-    console.error("Error in POST /sections:", error); // Debug log
     next(error);
   }
 });
+
 
 module.exports = router;
