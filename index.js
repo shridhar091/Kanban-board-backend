@@ -31,5 +31,3 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`Kanban backend running at http://localhost:${PORT}`);
 });
-
-module.exports = app;
