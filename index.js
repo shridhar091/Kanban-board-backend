@@ -16,6 +16,11 @@ const PORT = process.env.PORT || 5000;
 // }));
 
 // app.options('*', cors()); // handle preflight requests
+app.use(cors({
+  origin: 'https://kanban-board-frontend-rho.vercel.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  credentials: true
+}));
 app.use(express.json());
 
 // Connect to DB
